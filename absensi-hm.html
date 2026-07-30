@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presensi Kehadiran Siswa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-hover: #4338CA;
+      --primary-light: #EEF2FF;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-main: #0F172A;
+      --text-sub: #64748B;
+      --border: #E2E8F0;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 16px 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding: 24px 20px;
+      background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+      border-radius: 24px;
+      color: white;
+      box-shadow: 0 12px 24px -6px rgba(79, 70, 229, 0.3);
+    }
+
+    .icon-wrapper {
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-size: 28px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .admin-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: white;
+      text-decoration: none;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      box-shadow: 0 8px 16px -4px rgba(16, 185, 129, 0.25);
+    }
+
+    .admin-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-icon {
+      font-size: 22px;
+      background: rgba(255,255,255,0.2);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-text h2 { font-size: 15px; font-weight: 700; }
+    .admin-text p { font-size: 12px; opacity: 0.85; }
+
+    .search-box {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 18px 14px 46px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background-color: var(--card-bg);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: var(--text-sub);
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      margin: 20px 0 12px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+    }
+
+    .grid-classes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .class-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-bg);
+      padding: 18px 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .class-card:active {
+      transform: scale(0.96);
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+    }
+
+    .class-name { font-size: 20px; font-weight: 800; }
+    .class-label { font-size: 11px; color: var(--text-sub); }
+    .arrow-icon { margin-top: 8px; font-size: 12px; color: var(--primary); font-weight: 700; }
+
+    .footer { text-align: center; margin-top: 36px; font-size: 12px; color: var(--text-sub); }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <div class="header">
+      <div class="icon-wrapper">📋</div>
+      <h1>PRESENSI KEHADIRAN</h1>
+      <p>Pilih kelas di bawah ini untuk mengisi formulir</p>
+    </div>
+
+    <a href="https://drive.google.com/drive/folders/1ezyKsvRcK4qp1CVh4PykWidRsY7MJF6n?usp=sharing" target="_blank" class="admin-card">
+      <div class="admin-info">
+        <div class="admin-icon">📁</div>
+        <div class="admin-text">
+          <h2>Cek Rekap Absensi</h2>
+          <p>Folder Google Drive Rekapitulasi</p>
+        </div>
+      </div>
+      <span style="font-size: 20px;">➔</span>
+    </a>
+
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="Cari kelas (contoh: X-1, XI-7)..." onkeyup="filterClasses()">
+    </div>
+
+    <div class="section-title">
+      <span>Tingkat Kelas X</span>
+      <span class="badge">12 Kelas</span>
+    </div>
+
+    <div class="grid-classes">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfsCvGrb_EaUZst8mrBkxxPgPgIGS77CvZV1lLvp3VpW_5n5A/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-1 x1">
+        <div class="class-name">X-1</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2C3ow7QUkpXaWA424Y09MHGinDs26Mfh2RUu8v4yAb3d5-A/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-2 x2">
+        <div class="class-name">X-2</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdveJ8UoYSdXVK5gwYnBSgStsaFG5_mjK8_WIT-pTQBuajbzw/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-3 x3">
+        <div class="class-name">X-3</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSee03dH4lZcKeBLiteTtx7gnLzXSecB2N_KpLPqKLXUTGiisQ/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-4 x4">
+        <div class="class-name">X-4</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvQlmlrFzXQuPpAc1J1s00moAjfDIo0sU_qpZ70iw6Zc1XKg/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-5 x5">
+        <div class="class-name">X-5</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfs-TTfkQJhgr4Tu4K8WAXjYaqlLcP27ou9YL98Co1kknARqA/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-6 x6">
+        <div class="class-name">X-6</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxr7b1IpCtWc03jJkugn1Efxcp9vjDX9ccu0YFp9QRRD8TMw/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-7 x7">
+        <div class="class-name">X-7</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuJthWn-f8MFzRNk3q0glOkzE8-u5trrSw5pqXMPxCNZ6lFw/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-8 x8">
+        <div class="class-name">X-8</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdtnhQ2v1WnYdXBIAJ-XXKJB5vkneJ-Jxa5XjW9m-N4wBX2_A/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-9 x9">
+        <div class="class-name">X-9</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkO8GvuzMj-ymVSFZ6YHau9JFUi7GAMYcBvxJH0stftPlLAw/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-10 x10">
+        <div class="class-name">X-10</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdP0_A-xLDd8VBSzpG8uJt0PAfkXm8RRA60O1lS4bsaCieaTA/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="x-11 x11">
+        <div class="class-name">X-11</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfVa6f_z_nQ1V5jEA2PRTnJYsFc23KaNWhFh8uSeYwJ0QPjUw/viewform?usp=publish-editor" target="_blank" class="class-card search-item" data-name="x-12 x12">
+        <div class="class-name">X-12</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+    </div>
+
+    <div class="section-title">
+      <span>Tingkat Kelas XI</span>
+      <span class="badge">2 Kelas</span>
+    </div>
+
+    <div class="grid-classes">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwdlaYm_9q9bGXaQ2f6Z-ji2l2zzzsEwtvjbu7ftVouuI_ug/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="xi-7 xi7">
+        <div class="class-name">XI-7</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScemhX2gKIX2oC8BY3g8tvakYwrZN8IZF61YX1qkgwoZKh6-g/viewform?usp=sharing&ouid=112871944833588414694" target="_blank" class="class-card search-item" data-name="xi-8 xi8">
+        <div class="class-name">XI-8</div><div class="class-label">Isi Presensi</div><div class="arrow-icon">Buka Form ➔</div>
+      </a>
+    </div>
+
+    <div class="footer">
+      <p>Sistem Presensi Kehadiran Siswa © 2026</p>
+    </div>
+
+  </div>
+
+  <script>
+    function filterClasses() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const items = document.querySelectorAll('.search-item');
+      items.forEach(item => {
+        const name = item.getAttribute('data-name');
+        const cardText = item.innerText.toLowerCase();
+        if (name.includes(query) || cardText.includes(query)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
